@@ -1,4 +1,4 @@
-import Toggleable from './Toggleable'
+
 import PropTypes from 'prop-types'
 
 const LoginForm = ({
@@ -8,29 +8,27 @@ const LoginForm = ({
   handlePasswordChange,
   handleSubmit
 }) => (
-  <Toggleable buttonLabel='Show Login'>
-    <form data-test-id='login-form' onSubmit={handleSubmit}>
-      <div>
-        <input
-          type='text'
-          value={username}
-          name='Username'
-          placeholder='Username'
-          onChange={handleUsernameChange}
-        />
-      </div>
-      <div>
-        <input
-          type='password'
-          value={password}
-          name='Password'
-          placeholder='Password'
-          onChange={handlePasswordChange}
-        />
-      </div>
-      <button type='submit'>Login</button>
-    </form>
-  </Toggleable>
+  <form data-test-id='login-form' onSubmit={handleSubmit}>
+    <div>
+      <input
+        type='text'
+        value={username}
+        name='Username'
+        placeholder='Username'
+        onChange={handleUsernameChange}
+      />
+    </div>
+    <div>
+      <input
+        type='password'
+        value={password}
+        name='Password'
+        placeholder='Password'
+        onChange={handlePasswordChange}
+      />
+    </div>
+    <button type='submit'>Login</button>
+  </form>
 )
 
 LoginForm.propTypes = {
