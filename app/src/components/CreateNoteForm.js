@@ -37,7 +37,7 @@ const CreateNoteForm = ({ addNote, handleLogout }) => {
       </form>
       <div>
         <button onClick={handleLogout}>
-          LogOut
+          Logout
         </button>
       </div>
     </Toggleable>

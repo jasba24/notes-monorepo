@@ -1,51 +1,30 @@
-import { useEffect, useState } from 'react'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
-import Notes from './Notes'
+import './index.css'
 import NoteDetail from './components/NoteDetail'
-import { getAllNotes, setToken } from './services/notes'
-import Login from './Login'
-import { Helmet } from 'react-helmet'
 import Link from './components/Link'
-
-const Home = () => (
-  <>
-    <Helmet>
-      <title>Home | Notes App</title>
-    </Helmet>
-    <h1>Home Page</h1>
-  </>
-)
-
-const Users = () => <h1>Users Page</h1>
+import { useUser } from './hooks/useUser'
+import { useNotes } from './hooks/useNotes'
+import Login from './views/Login'
+import Notes from './views/Notes'
+import Home from './views/Home'
+import Users from './views/Users'
 
 const App = () => {
-  const [notes, setNotes] = useState([])
-  const [user, setUser] = useState(null)
+  const { user } = useUser()
+  const { notes } = useNotes()
 
-  useEffect(() => {
-    getAllNotes().then((initialNotes) => {
-      setNotes(initialNotes)
-    })
-  }, [])
-
-  useEffect(() => {
-    const loggedUserJson = window.localStorage.getItem('loggedNoteAppUser')
-    if (loggedUserJson) {
-      const user = JSON.parse(loggedUserJson)
-      setUser(user)
-      setToken(user.token)
-    }
-  }, [])
   return (
     <BrowserRouter>
-      <header>
+      <header className='spacing'>
         <Link route='/' name='Home' />
         <Link route='/notes' name='Notes' />
         <Link route='/users' name='Users' />
         {
           user
-            ? <em>logged as {user.name}</em>
-            : <Link route='/login' name='login' />
+            ? <em>Logged as {user.name}</em>
+            : (
+              <Link route='/login' name='Login' />
+              )
         }
 
       </header>
@@ -53,11 +32,11 @@ const App = () => {
       <Switch>
         <Route
           path='/login' render={
-          () => (
-            user
+          () => {
+            return user
               ? <Redirect to='/' />
               : <Login />
-          )
+          }
         }
         />
         <Route path='/notes/:noteId'>

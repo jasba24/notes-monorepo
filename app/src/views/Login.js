@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import LoginForm from './components/LoginForm.js'
-import { login } from './services/login'
-import { setToken } from './services/notes'
+import LoginForm from '../components/LoginForm.js'
+import { login } from '../services/login'
+import { setToken } from '../services/notes'
 import { useHistory } from 'react-router-dom'
+import Notification from '../components/Notification'
 
 export default function Login () {
   const history = useHistory()
@@ -24,9 +25,7 @@ export default function Login () {
       window.localStorage.setItem(
         'loggedNoteAppUser', JSON.stringify(user)
       )
-
       setToken(user.token)
-
       setUser(user)
       setUsername('')
       setPassword('')
@@ -41,7 +40,7 @@ export default function Login () {
   }
 
   if (errorMessage) {
-    return <p>{errorMessage}</p>
+    return <Notification message={errorMessage} />
   }
 
   if (user) {
