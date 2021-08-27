@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom'
+import StyledLink from './StyledLink'
 
 const LinkComponent = ({ route, name }) => {
   return (
-    <Link className='spacing' to={route}>{name}</Link>
+    <StyledLink to={route}>{name}</StyledLink>
   )
 }
 
