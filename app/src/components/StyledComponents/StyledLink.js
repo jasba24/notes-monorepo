@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: #09f;
+  color: green;
   padding: 5px;
 
   &:hover {
-    border-bottom: 1px solid #09f;
+    border-bottom: 1px solid green;
   }
 `
 

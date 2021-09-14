@@ -1,6 +1,6 @@
 import { forwardRef, useImperativeHandle, useState } from 'react'
 import PropTypes from 'prop-types'
-import StyledButton from './StyledButton'
+import StyledButton from './StyledComponents/StyledButton'
 
 const Toggleable = forwardRef(({ children, buttonLabel = 'Show' }, ref) => {
   const [visible, setVisible] = useState(false)

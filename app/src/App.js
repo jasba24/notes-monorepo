@@ -6,8 +6,7 @@ import { useUser } from './hooks/useUser'
 import { useNotes } from './hooks/useNotes'
 import Login from './views/Login'
 import Notes from './views/Notes'
-import Home from './views/Home'
-import Users from './views/Users'
+import StyledHeader from './components/StyledComponents/StyledHeader'
 
 const App = () => {
   const { user } = useUser()
@@ -15,19 +14,19 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <header className='spacing'>
-        <Link route='/' name='Home' />
-        <Link route='/notes' name='Notes' />
-        <Link route='/users' name='Users' />
-        {
+      <StyledHeader className='spacing'>
+        <Link route='/' name='Notes App' />
+        <nav>
+          <Link route='/' name='Notes' />
+          {
           user
             ? <em>Logged as {user.name}</em>
             : (
               <Link route='/login' name='Login' />
               )
         }
-
-      </header>
+        </nav>
+      </StyledHeader>
 
       <Switch>
         <Route
@@ -42,14 +41,8 @@ const App = () => {
         <Route path='/notes/:noteId'>
           <NoteDetail notes={notes} />
         </Route>
-        <Route path='/notes'>
-          <Notes />
-        </Route>
-        <Route path='/users'>
-          <Users />
-        </Route>
         <Route path='/'>
-          <Home />
+          <Notes />
         </Route>
       </Switch>
     </BrowserRouter>

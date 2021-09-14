@@ -1,4 +1,4 @@
-import StyledLink from './StyledLink'
+import StyledLink from './StyledComponents/StyledLink'
 
 const LinkComponent = ({ route, name }) => {
   return (

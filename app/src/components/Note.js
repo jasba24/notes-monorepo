@@ -1,5 +1,5 @@
-import StyledLink from './StyledLink'
-import StyledButton from './StyledButton'
+import StyledButton from './StyledComponents/StyledButton'
+import StyledLink from './StyledComponents/StyledLink'
 
 const Note = ({ note, toggleImportance }) => {
   const label = note.important
