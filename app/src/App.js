@@ -7,10 +7,15 @@ import { useNotes } from './hooks/useNotes'
 import Login from './views/Login'
 import Notes from './views/Notes'
 import StyledHeader from './components/StyledComponents/StyledHeader'
+import StyledLink from './components/StyledComponents/StyledLink'
+// import { useEffect } from 'react'
+import LoginPrueba from './views/LoginPrueba'
 
 const App = () => {
-  const { user } = useUser()
+  const { logout } = useUser()
   const { notes } = useNotes()
+
+  console.log('token', Boolean(window.localStorage.getItem('loggedNoteAppUser')))
 
   return (
     <BrowserRouter>
@@ -19,11 +24,15 @@ const App = () => {
         <nav>
           <Link route='/' name='Notes' />
           {
-          user
-            ? <em>Logged as {user.name}</em>
-            : (
-              <Link route='/login' name='Login' />
-              )
+            window.localStorage.getItem('loggedNoteAppUser')
+              ? (
+                <StyledLink onClick={logout}>
+                  Logout
+                </StyledLink>
+                )
+              : (
+                <Link route='/login' name='Login' />
+                )
         }
         </nav>
       </StyledHeader>
@@ -32,12 +41,15 @@ const App = () => {
         <Route
           path='/login' render={
           () => {
-            return user
+            return window.localStorage.getItem('loggedNoteAppUser')
               ? <Redirect to='/' />
               : <Login />
           }
         }
         />
+        <Route path='/loginPrueba'>
+          <LoginPrueba />
+        </Route>
         <Route path='/notes/:noteId'>
           <NoteDetail notes={notes} />
         </Route>

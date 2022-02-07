@@ -4,6 +4,7 @@ import { login as loginService } from '../services/login'
 
 export const useUser = () => {
   const [user, setUser] = useState(null)
+  const [action, setAction] = useState(null)
 
   useEffect(() => {
     const loggedUserJson = window.localStorage.getItem('loggedNoteAppUser')
@@ -12,7 +13,7 @@ export const useUser = () => {
       setToken(userLogin.token)
       setUser(userLogin)
     }
-  }, [])
+  }, [action])
 
   const login = (username, password) => {
     return loginService({
@@ -22,9 +23,9 @@ export const useUser = () => {
       window.localStorage.setItem(
         'loggedNoteAppUser', JSON.stringify(userLogin)
       )
-      console.log(userLogin)
       setToken(userLogin.token)
       setUser(userLogin)
+      setAction('login')
     })
   }
 
@@ -32,6 +33,7 @@ export const useUser = () => {
     window.localStorage.removeItem('loggedNoteAppUser')
     setToken(null)
     setUser(null)
+    setAction('logout')
   }
 
   return {

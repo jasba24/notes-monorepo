@@ -3,15 +3,16 @@ import Note from '../components/Note'
 import CreateNoteForm from '../components/CreateNoteForm'
 import Notification from '../components/Notification'
 import { useNotes } from '../hooks/useNotes'
-import { useUser } from '../hooks/useUser'
+// import { useUser } from '../hooks/useUser'
 import Link from '../components/Link'
+import HelmetTitle from '../components/HelmetTitle'
 
 export default function App () {
   const [errorMessage, setErrorMessage] = useState(null)
 
   const { notes, addNote, toggleImportanceOf } = useNotes()
 
-  const { user, logout } = useUser()
+  // const { user } = useUser()
 
   const toggleImportanceOfNote = (id) => {
     toggleImportanceOf(id) // el que viene del custom hook
@@ -27,17 +28,16 @@ export default function App () {
 
   return (
     <div>
-      <h1>Notes</h1>
+      <HelmetTitle page='Notes' />
 
       <Notification message={errorMessage} />
 
       {
-        user
+        window.localStorage.getItem('loggedNoteAppUser')
           ? <CreateNoteForm
               addNote={addNote}
-              handleLogout={logout}
             />
-          : <h2>you want to create a note, <Link route='login' name='log in' /> </h2>
+          : <h2>you want to create a note, <Link route='/login' name='log in' /> </h2>
       }
 
       {notes.length === 0 && 'Loading...'}

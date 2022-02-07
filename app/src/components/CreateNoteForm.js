@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react'
 import Toggleable from './Toggleable'
+import StyledInput from './StyledComponents/StyledInput'
+import StyledButton from './StyledComponents/StyledButton'
 
 const CreateNoteForm = ({ addNote, handleLogout }) => {
   const [newNote, setNewNote] = useState('')
@@ -27,19 +29,14 @@ const CreateNoteForm = ({ addNote, handleLogout }) => {
     <Toggleable ref={toggleableRef} buttonLabel='New note'>
       <h1>Create a new note</h1>
       <form data-test-id='note-form' onSubmit={handleSubmit}>
-        <input
+        <StyledInput
           type='text'
           placeholder='Write your note content'
           onChange={handleChange}
           value={newNote}
         />
-        <button>Create note</button>
+        <StyledButton>Create note</StyledButton>
       </form>
-      <div>
-        <button onClick={handleLogout}>
-          Logout
-        </button>
-      </div>
     </Toggleable>
   )
 }
