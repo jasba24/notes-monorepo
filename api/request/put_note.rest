@@ -1,8 +1,7 @@
-PUT http://localhost:3001/api/notes/610be6f1defd05491ecfcd6f
+PUT http://localhost:3001/api/notes/6112940c82c3845591d3b530
 Content-Type: application/json
 
 {
 	"content": "Suscribete con prime",
 	"important": true
 }
-Dale like y comparte
